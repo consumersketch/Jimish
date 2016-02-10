@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div id="overlay"></div>
+	<table cellspacing='0' cellpadding='0' width='900px'>
+		<tr>			
+			<th>{{ form_label(form.client, 'Client') }}	</th>
+			<th>{{ form_label(form.product, 'Product') }}</th>			
+			<th>{{ form_label(form.relative_date, 'Relative Date') }}</th>
+			<th></th>
+		</tr>	
+
+		<tr>			
+			<td>{{ form_widget(form.client) }}</td>
+			<td>{{ form_widget(form.product) }}</td>			
+			<td>{{ form_widget(form.relative_date) }}&nbsp;&nbsp;<input type='button' id='id_report' value='Submit' onClick='javascript:getReport();'></td>
+			
+		</tr>
+	</table>
+	<p>&nbsp;</p>
+	<table cellspacing='3' cellpadding='3' width='900px' style='border:1px solid #606060;display:none'id='report_result'>
+		<tr>			
+			<th>Invoice Num</th>
+			<th>Invoice Date</th>
+			<th>Product</th>
+			<th>Qty</th>
+			<th>Price</th>
+			<th>Total</th>
+		</tr>
+
+	</table>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		var product_url = '{{ url('get_product_data') }}';
+		var report_url = '{{ url('get_report_data') }}';
+	</script>
+	<script type="text/javascript" src='{{ asset('js/report.js')}}'></script>
+{% endblock %}
